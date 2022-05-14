@@ -2,7 +2,7 @@ module github.com/strongjz/go-container-supply-chain-example
 
 go 1.18
 
-replace github.com/strongjz/go-container-supply-chain-example/app => ../app
+replace github.com/strongjz/go-container-supply-chain-example/app => ./app
 
 require (
 	github.com/strongjz/go-container-supply-chain-example/app v0.0.1

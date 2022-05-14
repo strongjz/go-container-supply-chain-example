@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/strongjz/go-container-supply-chain-example/app"
 )
 
 func main() {
 
-	app := app.New()
+	app := &App{}
 	fmt.Println("Starting App")
 	app.Engine()
-	app.Start()
+	if err := app.Start(); err != nil {
+		fmt.Println("Error Starting server: ", err)
+	}
 }

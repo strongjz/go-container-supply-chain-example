@@ -1,4 +1,4 @@
-package app
+package main
 
 import (
 	"fmt"
@@ -37,7 +37,7 @@ func (a *App) Engine() *gin.Engine {
 	return a.router
 }
 
-func (a *App) Start() {
+func (a *App) Start() error {
 
-	a.router.Run()
+	return a.router.Run()
 }

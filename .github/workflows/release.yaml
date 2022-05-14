@@ -28,10 +28,10 @@ jobs:
 
       - name: Install ko
         uses: imjasonh/setup-ko@2c3450ca27f6e6f2b02e72a40f2163c281a1f675 # v0.4
-      - run: echo $(ko build  -t ${{ github.sha }} ./)t
+      - run: echo $(ko build  -t ${{ github.sha }} ./)
 
-      - name: Sign the images with GitHub OIDC Token **not production ready**
-        uses: sigstore/cosign-installer@main
+      - name: Sign the images with GitHub OIDC Token
+        uses: sigstore/cosign-installer@536b37ec5d5b543420bdfd9b744c5965bd4d8730 #v2.3.0
 
       - name: Signing Image
         run: cosign sign ${IMAGE}

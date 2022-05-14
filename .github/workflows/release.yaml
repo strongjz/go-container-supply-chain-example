@@ -28,13 +28,19 @@ jobs:
 
       - name: Install ko
         uses: imjasonh/setup-ko@2c3450ca27f6e6f2b02e72a40f2163c281a1f675 # v0.4
-      - run: echo $(ko build  -t ${{ github.sha }} ./)
+      - run: |
+          ko build  -t ${{ github.sha }} . --image-ref image.txt
+          cat image.txt
+          echo "::set-env name=IMAGE::$(cat image.txt)"
+        id: ko_build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sign the images with GitHub OIDC Token
         uses: sigstore/cosign-installer@536b37ec5d5b543420bdfd9b744c5965bd4d8730 #v2.3.0
 
       - name: Signing Image
-        run: cosign sign ${IMAGE}
+        run: cosign sign $IMAGE
         env:
-          IMAGE: ${{ steps.install_ko.outputs.*}}
           COSIGN_EXPERIMENTAL: 1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

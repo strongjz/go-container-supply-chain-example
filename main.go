@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/strongjz/go_example_app/app"
+	"github.com/strongjz/go-container-supply-chain-example/app"
 )
 
 func main() {

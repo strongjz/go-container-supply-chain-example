@@ -2,9 +2,10 @@ module github.com/strongjz/go-container-supply-chain-example
 
 go 1.18
 
-require github.com/strongjz/go_example_app/app v0.0.0-20210918165749-1faf91f33ce2
+replace github.com/strongjz/go-container-supply-chain-example/app => ../app
 
 require (
+	github.com/strongjz/go-container-supply-chain-example/app v0.0.1
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.7.7 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect

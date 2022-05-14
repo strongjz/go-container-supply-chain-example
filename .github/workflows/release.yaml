@@ -5,6 +5,18 @@ on:
     branches: ['main']
 
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      GO111MODULE: on
+    steps:
+      - name: Checkout Source
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      - name: Run Gosec Security Scanner
+        uses: securego/gosec@607d607b516bf301996678c68dc371a0dba9a938 #v2.11.0
+        with:
+          args: ./...
+
   build:
     name: build
     runs-on: ubuntu-latest

@@ -2,7 +2,7 @@
 
 - Signing commits with [sigstore gitsign](https://github.com/sigstore/gitsign)
 - Build container with [ko](https://github.com/google/ko), SBOM as well
-- Container signing with [sigstore cosing](https://github.com/sigstore/cosign)
+- Container signing with [sigstore cosign](https://github.com/sigstore/cosign)
 - Fulcio Certificates - ephemeral certs w/ requester identity in certificate metadata
 - Builder identification is done through the fulcio certificate
   - Certificate attests to workload identity and signs provenance
@@ -23,8 +23,20 @@
 SLSA Level 3 Requirements
 
 Source:
-- Version controlled - Property of GitHub/Git
-- Verified history - signed commits using gitsign
+- Version controlled: Property of GitHub/Git
+- Verified history: signed commits using gitsign
+```bash
+ git --no-pager log --show-signature -1
+15c775104eb1eab2d305a6fdef89d46fbd7e8e99 (HEAD -> main, origin/main, origin/HEAD) tlog index: 2344075
+smimesign: Signature made using certificate ID 0xee02388e292cf73b03403e41695926ecbeb1f1c2 | CN=sigstore,O=sigstore.dev
+smimesign: Good signature from [strong.james.e@gmail.com]
+Parsed Git signature: true
+Validated Git signature: true
+Located Rekor entry: true
+Validated Rekor entry: true
+readme up
+```
+
 Build:
 - Build as code: Build using GitHub workflow in source repository
 - Ephemeral environment: Property of GitHub job

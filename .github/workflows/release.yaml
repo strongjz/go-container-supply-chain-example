@@ -26,16 +26,12 @@ jobs:
         with:
           args: ./...
 
-      - uses: sigstore/cosign-installer@536b37ec5d5b543420bdfd9b744c5965bd4d8730 #v2.3.0
-      - name: Publish and sign image
+      - name: Install ko
+        uses: imjasonh/setup-ko@2c3450ca27f6e6f2b02e72a40f2163c281a1f675 # v0.4
+        run: echo $(ko build  -t ${{ github.sha }} ./)
+
+      - name: Sign the images with GitHub OIDC Token **not production ready**
+        run: cosign sign ${IMAGE}
         env:
-          KO_DOCKER_REPO: ghcr.io/${{ github.repository }}
-          COSIGN_EXPERIMENTAL: 'true'
-        run: |
-          go build ./
-          echo "${{ github.token }}" | ./ko login ghcr.io --username "${{ github.actor }}" --password-stdin
-          img=$(./ko build --bare --platform=all -t ${{ github.sha }} ./)
-          echo "built ${img}"
-          cosign sign ${img} \
-              -a sha=${{ github.sha }} \
-              -a run_id=${{ github.run_id }}
+          IMAGE: ${{ steps.install_ko.outputs.*}}
+          COSIGN_EXPERIMENTAL: 1

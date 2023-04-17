@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.8.2
-	github.com/lib/pq v1.10.5
+	github.com/lib/pq v1.10.8
 )
 
 require (
